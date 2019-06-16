@@ -1,3 +1,5 @@
+// Package dflt provide default values in the absence of
+// defined environment variables.
 package dflt
 
 import (
