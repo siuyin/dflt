@@ -3,6 +3,7 @@
 package dflt
 
 import (
+	"log"
 	"os"
 	"strconv"
 )
@@ -23,6 +24,22 @@ func EnvInt(enVar string, dflt int) (ret int, err error) {
 	ret = dflt
 	if os.Getenv(enVar) != "" {
 		ret, err = strconv.Atoi(os.Getenv(enVar))
+	}
+	return
+}
+
+func EnvIntMust(enVar string, dflt int) (ret int) {
+	ret = dflt
+	var err error
+
+	val := os.Getenv(enVar)
+	if val == "" {
+		return
+	}
+
+	ret, err = strconv.Atoi(os.Getenv(enVar))
+	if err != nil {
+		log.Fatalf("Unable to parse %q as an integer", val)
 	}
 	return
 }
